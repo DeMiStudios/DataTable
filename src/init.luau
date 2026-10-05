@@ -3,8 +3,8 @@
 --!optimize 2
 
 --// Imports
-local ColumnIndex = require("@self/ColumnIndex")
-local Types = require("@self/Types")
+const ColumnIndex = require("@self/ColumnIndex")
+const Types = require("@self/Types")
 
 --// Types
 export type DataTable<Row> = Types.DataTable<Row>
@@ -23,11 +23,11 @@ type Self = {
 
 --// DataTable Class
 --- Data Tables are immutable lists of rows with lazily indexed, type-safe column queries.
-local DataTable = {}
+const DataTable = {}
 DataTable.__index = DataTable
 
 --- Freezes `value` and every table reachable from it (keys included). Ignores `__iter`.
-local function deepFreeze(value: any, visited: { [any]: true })
+const function deepFreeze(value: any, visited: { [any]: true })
 	if type(value) ~= "table" or visited[value] then
 		return
 	end
@@ -43,7 +43,7 @@ local function deepFreeze(value: any, visited: { [any]: true })
 	end
 end
 
-local function freeze(value: any)
+const function freeze(value: any)
 	if not table.isfrozen(value) then
 		table.freeze(value)
 	end
@@ -51,7 +51,7 @@ end
 
 --- Creates a DataTable over `rows`. Freezes `rows` in place, and every nested table unless `DeepFreeze` is false.
 function DataTable.new<Row>(rows: { Row }, options: DataTableOptions?): DataTable<Row>
-	local name = options and options.Name or "DataTable"
+	const name = options and options.Name or "DataTable"
 
 	if options and options.DeepFreeze == false then
 		for _, row in rows do
@@ -62,7 +62,7 @@ function DataTable.new<Row>(rows: { Row }, options: DataTableOptions?): DataTabl
 		deepFreeze(rows, {})
 	end
 
-	local self: Self = {
+	const self: Self = {
 		Name = name,
 		Rows = rows,
 		_columns = {},
@@ -76,7 +76,7 @@ function DataTable.Unique(self: Self, column: string): Self
 end
 
 function DataTable.Index(self: Self, column: string, kind: IndexKind): Self
-	local index = DataTable._getColumn(self, column)
+	const index = DataTable._getColumn(self, column)
 	if kind == "Hash" then
 		ColumnIndex._getBuckets(index)
 	elseif kind == "Sorted" then
@@ -96,7 +96,7 @@ function DataTable.Computed(self: Self, key: (row: any) -> any): ColumnIndex.Col
 end
 
 function DataTable.Filter(self: Self, predicate: (row: any) -> boolean): { any }
-	local results: { any } = {}
+	const results: { any } = {}
 	for _, row in self.Rows do
 		if predicate(row) then
 			table.insert(results, row)

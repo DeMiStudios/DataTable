@@ -1,7 +1,7 @@
 [package]
 name = "demistudios/datatable"
 description = "Immutable, typed tables of rows for Roblox, with lazily built hash and sorted indexes for lookups by any column"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 authors = ["DeMiStudios"]
 realm = "shared"

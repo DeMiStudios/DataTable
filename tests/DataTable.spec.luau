@@ -11,7 +11,7 @@ const DataTable = require(ReplicatedStorage.DataTable)
 type Item = { Id: string, Rarity: "Common" | "Rare", Value: number?, Tags: { string } }
 
 -- Ten items: every fifth is Rare, Value cycles 1, 2, 3 for the first eight, and the last two have no Value.
-local function makeRows(): { Item }
+const function makeRows(): { Item }
 	const rows: { Item } = {}
 	for i = 1, 10 do
 		rows[i] = {
@@ -24,7 +24,7 @@ local function makeRows(): { Item }
 	return rows
 end
 
-local function ids(rows: { read [number]: Item }): { string }
+const function ids(rows: { read [number]: Item }): { string }
 	const result = {}
 	for _, row in rows do
 		table.insert(result, row.Id)
@@ -34,7 +34,7 @@ end
 
 -- Returns the message `callback` errors with. Assert on it with `toContain`, not `toThrow`: Jest strips what it takes to
 -- be a "file:line:" prefix from thrown strings, and the file and line differ between Studio and the CLI anyway.
-local function errorOf(callback: () -> ()): string
+const function errorOf(callback: () -> ()): string
 	const ok, err = pcall(callback)
 	return if ok then "<no error>" else tostring(err)
 end

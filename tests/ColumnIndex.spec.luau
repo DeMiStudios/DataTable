@@ -13,7 +13,7 @@ type Item = { Id: string, Rarity: "Common" | "Rare", Value: number? }
 
 -- Ten items: every fifth is Rare, Value cycles 1, 2, 3 for the first eight, and the last two have no Value.
 -- So Value 1 is rows 1, 4, 7; Value 2 is rows 2, 5, 8; Value 3 is rows 3, 6.
-local function makeTable(): DataTable.DataTable<Item>
+const function makeTable(): DataTable.DataTable<Item>
 	const rows: { Item } = {}
 	for i = 1, 10 do
 		rows[i] = {
@@ -25,7 +25,7 @@ local function makeTable(): DataTable.DataTable<Item>
 	return DataTable.new(rows, { Name = "Items" })
 end
 
-local function ids(rows: { read [number]: Item }): { string }
+const function ids(rows: { read [number]: Item }): { string }
 	const result = {}
 	for _, row in rows do
 		table.insert(result, row.Id)
@@ -35,14 +35,14 @@ end
 
 -- Returns the message `callback` errors with. Assert on it with `toContain`, not `toThrow`: Jest strips what it takes to
 -- be a "file:line:" prefix from thrown strings, and the file and line differ between Studio and the CLI anyway.
-local function errorOf(callback: () -> ()): string
+const function errorOf(callback: () -> ()): string
 	const ok, err = pcall(callback)
 	return if ok then "<no error>" else tostring(err)
 end
 
 -- Runs `callback` and returns the warnings it emitted for the DataTable named `name`. Filtering by name keeps a late
 -- warning from an earlier test out of the result.
-local function captureWarnings(name: string, callback: () -> ()): { string }
+const function captureWarnings(name: string, callback: () -> ()): { string }
 	const prefix = `[DataTable] {name}:`
 	const warnings = {}
 	const connection = LogService.MessageOut:Connect(function(message, messageType)
@@ -221,7 +221,7 @@ describe("lookups on a sorted-only index", function()
 end)
 
 describe("NaN values", function()
-	local function makeNaNTable(name: string)
+	const function makeNaNTable(name: string)
 		return DataTable.new(
 			{ { Id = "a", Value = 1 }, { Id = "b", Value = 0 / 0 }, { Id = "c", Value = 0 / 0 } },
 			{ Name = name }

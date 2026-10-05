@@ -32,8 +32,12 @@ DataTable = "demistudios/datatable@0.1.0"
 
 ## Requirements
 
-DataTable targets the **new type solver**. Its types use type functions, `keyof`, `index` and read-only properties,
-which the old solver doesn't understand. The old solver is not supported.
+DataTable is written for current Luau and targets the **new type solver**:
+
+- It uses `const` declarations, so it needs a Luau version (and tooling, if you lint or format your `Packages`
+  folder) that supports them.
+- Its types use type functions, `keyof`, `index` and read-only properties, which the old type solver doesn't
+  understand. The old solver is not supported.
 
 ## Guarantees
 
@@ -137,7 +141,9 @@ Every message starts with `[DataTable]`.
 
 Tools are managed by [Rokit](https://github.com/rojo-rbx/rokit). Run `rokit install`, then `wally install`.
 
-Formatting is checked with StyLua (`stylua --check src tests examples`) and types with luau-lsp.
+Formatting is checked with StyLua (`stylua --check src tests examples`) and types with luau-lsp. The
+[CI workflow](.github/workflows/ci.yml) runs both. The test place maps `src` to `ReplicatedStorage.Packages.DataTable`
+as well, so the examples resolve their `require` and are type-checked too.
 
 ### Running the tests in Studio
 

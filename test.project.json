@@ -16,6 +16,15 @@
 			},
 			"Tests": {
 				"$path": "tests"
+			},
+			"Packages": {
+				"$className": "Folder",
+				"DataTable": {
+					"$path": "src"
+				}
+			},
+			"Examples": {
+				"$path": "examples"
 			}
 		}
 	}

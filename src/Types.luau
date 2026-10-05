@@ -21,7 +21,7 @@ end
 --- The type of `row[column]` without nil: `Required<index<Row, Column>>`.
 --- A type function rather than an alias because StyLua can't parse the `>>` that nesting would need.
 export type function ColumnValue(row: type, column: type): type
-	local value = row:readproperty(column)
+	const value = row:readproperty(column)
 	if value == nil then
 		-- Not a column; `keyof` at the call site reports the error.
 		return types.never
