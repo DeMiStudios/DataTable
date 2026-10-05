@@ -1,0 +1,29 @@
+[package]
+name = "demistudios/datatable"
+description = "Immutable, typed tables of rows for Roblox, with lazily built hash and sorted indexes for lookups by any column"
+version = "0.1.0"
+license = "MIT"
+authors = ["DeMiStudios"]
+realm = "shared"
+registry = "https://github.com/UpliftGames/wally-index"
+homepage = "https://github.com/DeMiStudios/DataTable"
+repository = "https://github.com/DeMiStudios/DataTable"
+exclude = [
+	"tests",
+	"examples",
+	"scripts",
+	".github",
+	".vscode",
+	"test.project.json",
+	"rokit.toml",
+	"stylua.toml",
+	".luaurc",
+	"*.rbxl",
+	"*.rbxlx",
+	"*.lock",
+	"sourcemap.json",
+]
+
+[dev-dependencies]
+Jest = "roblox/jest@3.20.1"
+JestGlobals = "roblox/jest-globals@3.20.1"

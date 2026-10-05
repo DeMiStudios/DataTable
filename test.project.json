@@ -1,0 +1,22 @@
+{
+	"name": "datatable-tests",
+	"tree": {
+		"$className": "DataModel",
+		"ServerScriptService": {
+			"$properties": {
+				"LoadStringEnabled": true
+			}
+		},
+		"ReplicatedStorage": {
+			"DataTable": {
+				"$path": "src"
+			},
+			"DevPackages": {
+				"$path": "DevPackages"
+			},
+			"Tests": {
+				"$path": "tests"
+			}
+		}
+	}
+}
